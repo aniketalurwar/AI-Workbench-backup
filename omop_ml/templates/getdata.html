@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=integer], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+h2 {
+  padding: 10px;
+  text-align: center;
+  background: #002855;
+  color: white;
+  font-size: 40px;
+}
+
+h3 {
+  padding: 10px;
+  text-align: center;
+  background: #002855;
+  color: white;
+  font-size: 25px;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit], .downloadbutton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+  width: 90%;
+  text-decoration: none;
+  text-align:center;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-25b {
+  float: left;
+  width: calc(25% - 10px);
+  margin-top: 6px;
+  margin-left: 10px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+  font-size: 30px;
+  color: #002855;
+}
+.chartcontainer {
+    width: 100%;
+    display: flex;
+    height: 300px;
+}
+
+.chart{
+    width: 50%;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit], .col-25b, .downloadbutton {
+    width: 100%;
+    margin-top: 0;
+  }
+  .chart {
+    width: 100%;
+    float: left;
+  }
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Research Workbench</title>
+</head>
+<body>
+<h2>OMOP model has been generated</h2>
+<form method="post" >
+    <div class="container">
+     <div class="row">
+      <div class="col-75">
+          <label>Accuracy of the model is : </label>
+          <label><strong>{{ hosp }}</strong></label>
+      </div>
+     </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-75">
+          <label>Cohort size for testing the model : </label>
+          <label><strong>{{ icu }}</strong></label>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-75">
+          <label>Model Name : </label>
+          <label><strong>{{ outcome }}</strong></label>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+
+    <h3>Characteristics of data:</h3>
+    <div class="chartcontainer">
+
+        <div id="chart1" class="chart" >
+            <canvas id="pie-chart1" style="width:100%;height:100%"></canvas>
+        </div>
+        <div id="chart2" class="chart" >
+            <canvas id="pie-chart2" style="width:100%;height:100%"></canvas>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+    <div class="chartcontainer">
+
+        <div id="chart3" class="chart" >
+            <canvas id="pie-chart3" style="width:100%;height:100%"></canvas>
+        </div>
+        <div id="chart4" class="chart" >
+            <canvas id="pie-chart4" style="width:100%;height:100%"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+    <div class="chartcontainer">
+
+        <div id="chart5" class="chart" >
+            <canvas id="pie-chart5" style="width:100%;height:100%"></canvas>
+        </div>
+        <div id="chart6" class="chart" >
+            <canvas id="bar-chart6" style="width:100%;height:100%"></canvas>
+        </div>
+    </div>
+    <input type="hidden" id = "st" name = "st" value=" {{ selectedtext }} "/>
+    <input type="hidden" id = "fn" name = "fn" value=" {{ outcome }} "/>
+        <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-25b">
+            <input type="submit" name= "btnnew" value="Try out new Model" action="/home/"> </input>
+        </div>
+        <div class="col-25b">
+            <input type="submit" name= "btnmodel" value="Predict using model" action="/modelhome/"> </input>
+        </div>
+        <div class="col-25b">
+            <a class="downloadbutton" href="data:text/plain;charset=UTF-8,{{ csvfile }}" download="Workbench_Data.csv">Download Generated Data</a>
+        </div>
+    </div>
+
+    </div>
+</form>
+</body>
+</html>
+<script>
+var config1 = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: {{ piedataage|safe }},
+          backgroundColor: [
+            '#111E6C', '#0080FF', '#7EF9FF', '#00FF7F', '#32CD32', '#2E8B57'
+          ],
+          label: 'Population'
+        }],
+        labels: {{ pielabelage|safe }}
+      },
+      options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Age Split',
+            fontSize: 20
+        }
+      }
+    };
+var config2 = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ piedatagen|safe }},
+          backgroundColor: [
+            '#FF69B4', '#0080FF', '#00FF7F', '#7EF9FF', '#32CD32', '#2E8B57'
+          ],
+          label: ['Female','Male']
+        }],
+        labels: {{ pielabelgen|safe }}
+      },
+      options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Gender Split',
+            fontSize: 20
+        }
+      }
+    };
+var config3 = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: {{ piedatarace|safe }},
+          backgroundColor: [
+            '#111E6C', '#0080FF', '#7EF9FF', '#00FF7F', '#32CD32', '#FFBF00', '#2E8B57'
+          ],
+          label: 'Population'
+        }],
+        labels: {{ pielabelrace|safe }}
+      },
+      options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Race Split',
+            fontSize: 20
+        }
+      }
+    };
+var config4 = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ piedataeth|safe }},
+          backgroundColor: [
+            '#111E6C', '#0080FF', '#00FF7F', '#7EF9FF', '#32CD32', '#2E8B57'
+          ],
+          label: ['Female','Male']
+        }],
+        labels: {{ pielabeleth|safe }}
+      },
+      options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Ethnicity Split',
+            fontSize: 20
+        }
+      }
+    };
+var config5 = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ piedataoutput|safe }},
+          backgroundColor: [
+            '#111E6C', '#0080FF', '#7EF9FF', '#00FF7F', '#32CD32', '#FFBF00', '#2E8B57'
+          ],
+          label: 'Population'
+        }],
+        labels: {{ pielabeloutput|safe }}
+      },
+      options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Output Split',
+            fontSize: 20
+        }
+      }
+    };
+var config6 = {
+      type: 'bar',
+      data: {
+        datasets: [{
+          data: {{ bardatapc|safe }},
+          backgroundColor: [
+            '#111E6C', '#0080FF', '#7EF9FF', '#00FF7F', '#32CD32', '#FFBF00', '#2E8B57', '#111E6C', '#0080FF', '#7EF9FF'
+          ],
+          label: 'Count At Risk'
+        }],
+        labels: {{ barlabelpc|safe }}
+      },
+      options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Pre Existing Conditions for At Risk',
+            fontSize: 20
+        }
+      }
+    };
+$(document).ready(function(){
+
+var ctx1 = document.getElementById('pie-chart1').getContext('2d');
+      window.myPie1 = new Chart(ctx1, config1);
+var ctx2 = document.getElementById('pie-chart2').getContext('2d');
+      window.myPie2 = new Chart(ctx2, config2);
+var ctx3 = document.getElementById('pie-chart3').getContext('2d');
+      window.myPie3 = new Chart(ctx3, config3);
+var ctx4 = document.getElementById('pie-chart4').getContext('2d');
+      window.myPie4 = new Chart(ctx4, config4);
+var ctx5 = document.getElementById('pie-chart5').getContext('2d');
+      window.myPie5 = new Chart(ctx5, config5);
+var ctx6 = document.getElementById('bar-chart6').getContext('2d');
+      window.myBar6 = new Chart(ctx6, config6);
+})
+
+</script>

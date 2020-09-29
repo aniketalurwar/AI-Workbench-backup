@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<style>
+    h4 {
+  padding: 5px;
+  text-align: center;
+  background: #002855;
+  color: white;
+  font-size: 20px;
+  height: 40px;
+}
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Research Workbench</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/6c67c6518b.js" crossorigin="anonymous"></script>
+<h2><i class="fas fa-microchip" style="color:#FFBF00"></i> Model Prediction</h2>
+<form method="post" action="/modelprediction/">
+    <div class="containermain">
+    <div class="container1">
+        <h3><i class="fas fa-user-friends" style="color:#FFBF00"></i> Characteristics </h3>
+    <div class="col-50 age">
+      <div class="col-50">
+        <label for="age">Age Group</label>
+      </div>
+      <div class="col-50">
+        <select id="age" name="age">
+          <option value="1">0 - 18</option>
+          <option value="2">19 - 29</option>
+          <option value="3">30 - 39</option>
+          <option value="4">40 - 49</option>
+          <option value="5">50 - 64</option>
+          <option value="6">65+</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 gen">
+      <div class="col-50">
+        <label for="gender">Gender</label>
+      </div>
+      <div class="col-50">
+        <select id="gender" name="gender">
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-100 race">
+      <div class="col-25">
+        <label for="race">Race</label>
+      </div>
+      <div class="col-75">
+        <select id="race" name="race">
+          <option value="1">Asian</option>
+          <option value="2">American Indian or Alaska Native</option>
+          <option value="4">Black or African American</option>
+          <option value="5">Caucasian</option>
+          <option value="6">Native Hawaiian or Pacific Islander</option>
+          <option value="7">Unknown</option>
+          <option value="8">MultiRace</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-100 eth">
+      <div class="col-25">
+        <label for="eth">Ethnicity</label>
+      </div>
+      <div class="col-75">
+        <select id="eth" name="eth">
+          <option value="1">Hispanic, Latino or Spanish origin</option>
+          <option value="2">Not Hispanic, Latino or Spanish origin</option>
+          <option value="3">Unknown</option>
+        </select>
+      </div>
+    </div>
+
+    </div>
+    <div class="container2">
+        <h3><i class="fas fa-disease" style="color:#FFBF00"></i> Pre-Existing Conditions </h3>
+    <div class="col-50 ht">
+      <div class="col-50">
+        <label for="ht">Hypertension</label>
+      </div>
+      <div class="col-50">
+        <select id="ht" name="ht">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 db">
+      <div class="col-50">
+        <label for="db">Diabetes</label>
+      </div>
+      <div class="col-50">
+        <select id="db" name="db">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 kd">
+      <div class="col-50">
+        <label for="kd">Kidney Problems</label>
+      </div>
+      <div class="col-50">
+        <select id="kd" name="kd">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 ty">
+      <div class="col-50">
+        <label for="ty">Cancer</label>
+      </div>
+      <div class="col-50">
+        <select id="ty" name="ty">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 ob">
+      <div class="col-50">
+        <label for="ob">Obesity</label>
+      </div>
+      <div class="col-50">
+        <select id="ob" name="ob">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 mg">
+      <div class="col-50">
+        <label for="mg">Migraine</label>
+      </div>
+      <div class="col-50">
+        <select id="mg" name="mg">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 ast">
+      <div class="col-50">
+        <label for="ast">Asthma</label>
+      </div>
+      <div class="col-50">
+        <select id="ast" name="ast">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 lv">
+      <div class="col-50">
+        <label for="lv">Liver Problems</label>
+      </div>
+      <div class="col-50">
+        <select id="lv" name="lv">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 lg">
+      <div class="col-50">
+        <label for="lg">Lung Problems</label>
+      </div>
+      <div class="col-50">
+        <select id="lg" name="lg">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 hb">
+      <div class="col-50">
+        <label for="hb">Hepatitis B</label>
+      </div>
+      <div class="col-50">
+        <select id="hb" name="hb">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 hc">
+      <div class="col-50">
+        <label for="hc">Hepatitis C</label>
+      </div>
+      <div class="col-50">
+        <select id="hc" name="hc">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-50 hv">
+      <div class="col-50">
+        <label for="hv">HIV</label>
+      </div>
+      <div class="col-50">
+        <select id="hv" name="hv">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+    </div>
+    </div>
+    <!--<label>hh {{ charac1 }}</label>
+        <label>hh {{ charac2 }}</label>
+        <label>{{ modelname }}</label>-->
+     <div class="container3">
+        <h3><i class="fas fa-vials" style="color:#FFBF00"></i> Latest Labs </h3>
+    <div class="col-50 wbc">
+      <div class="col-50">
+        <label for="wbc">WBC</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="wbc" name="wbc">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 hemo">
+      <div class="col-50">
+        <label for="hemo">Hemoglobin</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="hemo" name="hemo">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 glu">
+      <div class="col-50">
+        <label for="glu">Glucose</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="glu" name="glu">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 hema">
+      <div class="col-50">
+        <label for="hema">Hematocrat</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="hema" name="hema">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 pla">
+      <div class="col-50">
+        <label for="pla">Platelet Count</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="pla" name="pla">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 sod">
+      <div class="col-50">
+        <label for="sod">Sodium</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="sod" name="sod">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 pot">
+      <div class="col-50">
+        <label for="pot">Potassium</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="pot" name="pot">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 bun">
+      <div class="col-50">
+        <label for="bun">BUN</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="bun" name="bun">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 inr">
+      <div class="col-50">
+        <label for="inr">PT/INR</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="inr" name="inr">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 cal">
+      <div class="col-50">
+        <label for="cal">Calcium</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="cal" name="cal">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 alb">
+      <div class="col-50">
+        <label for="alb">Albumin</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="alb" name="alb">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 tp">
+      <div class="col-50">
+        <label for="tp">Total Protein</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="tp" name="tp">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 co">
+      <div class="col-50">
+        <label for="co">Total CO2</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="co" name="co">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 cl">
+      <div class="col-50">
+        <label for="cl">Chloride</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="cl" name="cl">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 cr">
+      <div class="col-50">
+        <label for="cr">Creatinine</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="cr" name="cr">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 alp">
+      <div class="col-50">
+        <label for="alp">ALP</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="alp" name="alp">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 alt">
+      <div class="col-50">
+        <label for="alt">ALT</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="alt" name="alt">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 astl">
+      <div class="col-50">
+        <label for="astl">AST</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="astl" name="astl">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 bil">
+      <div class="col-50">
+        <label for="bil">Bilirubin</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="bil" name="bil">
+        </input>
+      </div>
+    </div>
+    </div>
+
+    <div class="container4">
+        <h3><i class="fas fa-heartbeat" style="color:#FFBF00"></i> Latest Vitals </h3>
+    <div class="col-50 sbp">
+      <div class="col-50">
+        <label for="sbp">SBP</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="sbp" name="sbp">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 dbp">
+      <div class="col-50">
+        <label for="dbp">DBP</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="dbp" name="dbp">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 hr">
+      <div class="col-50">
+        <label for="hr">Heart Rate</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="hr" name="hr">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 rr">
+      <div class="col-50">
+        <label for="rr">Respiratory Rate</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="rr" name="rr">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 temp">
+      <div class="col-50">
+        <label for="temp">Temperature</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="temp" name="temp">
+        </input>
+      </div>
+    </div>
+    <div class="col-50 o2sat">
+      <div class="col-50">
+        <label for="o2sat">Oxygen Sat.</label>
+      </div>
+      <div class="col-50">
+        <input type="integer" id="o2sat" name="o2sat">
+        </input>
+      </div>
+    </div>
+
+    <input type="hidden" id = "modelname" name = "modelname" value=" {{ modelname }} "/>
+        <input type="hidden" id = "file_name" name = "file_name" value=" {{ file_name }} "/>
+    <div class="row">
+        <div class="col-50">
+        <label for="lg1"></label>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="row" style="background:#f2f2f2">
+      <input type="submit" name= "btnpredict" value="Predict">
+    </div>
+  </form>
+</div>
+<script>
+$(document).ready(function(){
+
+var c1 = "'" + "{{charac1}}" + "'";
+var c2 = "'" + "{{charac2}}" + "'";
+var c3 = "'" + "{{charac3}}" + "'";
+var c4 = "'" + "{{charac4}}" + "'";
+var p1 = "'" + "{{precond1}}" + "'";
+var p2 = "'" + "{{precond2}}" + "'";
+var p3 = "'" + "{{precond3}}" + "'";
+var p4 = "'" + "{{precond4}}" + "'";
+var p5 = "'" + "{{precond5}}" + "'";
+var p6 = "'" + "{{precond6}}" + "'";
+var p7 = "'" + "{{precond7}}" + "'";
+var p8 = "'" + "{{precond8}}" + "'";
+var p9 = "'" + "{{precond9}}" + "'";
+var p10 = "'" + "{{precond10}}" + "'";
+var p11 = "'" + "{{precond11}}" + "'";
+var l1 = "'" + "{{labs1}}" + "'";
+var l2 = "'" + "{{labs2}}" + "'";
+var l3 = "'" + "{{labs3}}" + "'";
+var l4 = "'" + "{{labs4}}" + "'";
+var l5 = "'" + "{{labs5}}" + "'";
+var l6 = "'" + "{{labs6}}" + "'";
+var l7 = "'" + "{{labs7}}" + "'";
+var l8 = "'" + "{{labs8}}" + "'";
+var l9 = "'" + "{{labs9}}" + "'";
+var l10 = "'" + "{{labs10}}" + "'";
+var l11 = "'" + "{{labs11}}" + "'";
+var l12 = "'" + "{{labs12}}" + "'";
+var l13 = "'" + "{{labs13}}" + "'";
+var l14 = "'" + "{{labs14}}" + "'";
+var l15 = "'" + "{{labs15}}" + "'";
+var l16 = "'" + "{{labs16}}" + "'";
+var l17 = "'" + "{{labs17}}" + "'";
+var l18 = "'" + "{{labs18}}" + "'";
+var l19 = "'" + "{{labs19}}" + "'";
+var v1 = "'" + "{{vitals1}}" + "'";
+var v2 = "'" + "{{vitals2}}" + "'";
+var v3 = "'" + "{{vitals3}}" + "'";
+var v4 = "'" + "{{vitals4}}" + "'";
+var v5 = "'" + "{{vitals5}}" + "'";
+var v6 = "'" + "{{vitals6}}" + "'";
+var eq1 = "'" + "None" + "'";
+var eq2 = "'" + " None] " + "'";
+if ( c1 == eq1 ){ $(".age").hide();}
+if ( c2 == eq1 ){ $(".gen").hide();}
+if ( c3 == eq1 ){ $(".race").hide();}
+if ( c4 == eq1 ){ $(".eth").hide();}
+if ( p1 == eq1 ){ $(".ht").hide();}
+if ( p2 == eq1 ){ $(".db").hide();}
+if ( p3 == eq1 ){ $(".kd").hide();}
+if ( p4 == eq1 ){ $(".ty").hide();}
+if ( p5 == eq1 ){ $(".ob").hide();}
+if ( p6 == eq1 ){ $(".ast").hide();}
+if ( p7 == eq1 ){ $(".lv").hide();}
+if ( p8 == eq1 ){ $(".lg").hide();}
+if ( p9 == eq1 ){ $(".hb").hide();}
+if ( p10 == eq1 ){ $(".hc").hide();}
+if ( p11 == eq1 ){ $(".hv").hide();}
+if ( l1 == eq1 ){ $(".wbc").hide();}
+if ( l2 == eq1 ){ $(".hemo").hide();}
+if ( l3 == eq1 ){ $(".glu").hide();}
+if ( l4 == eq1 ){ $(".hema").hide();}
+if ( l5 == eq1 ){ $(".pla").hide();}
+if ( l6 == eq1 ){ $(".sod").hide();}
+if ( l7 == eq1 ){ $(".pot").hide();}
+if ( l8 == eq1 ){ $(".bun").hide();}
+if ( l9 == eq1 ){ $(".inr").hide();}
+if ( l10 == eq1 ){ $(".cal").hide();}
+if ( l11 == eq1 ){ $(".alb").hide();}
+if ( l12 == eq1 ){ $(".tp").hide();}
+if ( l13 == eq1 ){ $(".co").hide();}
+if ( l14 == eq1 ){ $(".cl").hide();}
+if ( l15 == eq1 ){ $(".cr").hide();}
+if ( l16 == eq1 ){ $(".alp").hide();}
+if ( l17 == eq1 ){ $(".alt").hide();}
+if ( l18 == eq1 ){ $(".astl").hide();}
+if ( l19 == eq1 ){ $(".bil").hide();}
+if ( v1 == eq1 ){ $(".sbp").hide();}
+if ( v2 == eq1 ){ $(".dbp").hide();}
+if ( v3 == eq1 ){ $(".hr").hide();}
+if ( v4 == eq1 ){ $(".rr").hide();}
+if ( v5 == eq1 ){ $(".temp").hide();}
+if ( v6 == eq1 ){ $(".o2sat").hide();}
+if (v1 == eq1 && v2 == eq1 && v3 == eq1 && v4 == eq1 && v5 == eq1 && v6 == eq1){ $(".container4").hide();}
+if (l1 == eq1 && l2 == eq1 && l3 == eq1 && l4 == eq1 && l5 == eq1 && l6 == eq1 && l7 == eq1 && l8 == eq1 && l9 == eq1 && l10 == eq1 && l11 == eq1 && l12 == eq1 && l13 == eq1 && l14 == eq1 && l15 == eq1 && l16 == eq1 && l17 == eq1 && l18 == eq1 && l19 == eq1){ $(".container3").hide();}
+if (p1 == eq1 && p2 == eq1 && p3 == eq1 && p4 == eq1 && p5 == eq1 && p6 == eq1 && p7 == eq1 && p8 == eq1 && p9 == eq1 && p10 == eq1 && p11 == eq1){ $(".container2").hide();}
+if (c1 == eq1 && c2 == eq1 && c3 == eq1 && c4 == eq1){ $(".container1").hide();}
+$(".mg").hide();
+});
+</script>
+</body>
+</html>

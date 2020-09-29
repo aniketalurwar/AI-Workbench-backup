@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<script src="https://kit.fontawesome.com/6c67c6518b.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+    input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+  width: 90%;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+  font-size : 40px;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Research Workbench</title>
+</head>
+<body>
+<h2>Model Prediction Result</h2>
+    <div class="containermain">
+<form method="post" action="/modelhome/">
+     <div class="row">
+      <div class="col-75">
+          <label>Risk of the Patient is : </label>
+          <label><strong>{{ hosp }}</strong></label>
+      </div>
+     </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+
+        <input type="hidden" id = "st" name = "st" value=" {{ file_name }} "/>
+    <input type="hidden" id = "fn" name = "fn" value=" {{ modelname }} "/>
+    <div class="row">
+        <div class="col-25b">
+      <input type="submit" name= "btnmodel" value="Predict using this model again" action="/modelhome/"> </input>
+        </div>
+        <div class="col-25b">
+            <input type="submit" name= "home" value="Create new Model" action="/home/"> </input>
+        </div>
+    </div>
+
+</form>
+        <form method="post" action="/apphome/">
+            <div class="row">
+        <div class="col-25b">
+            <input type="submit" name= "apphome" value="Go to Start" action="/apphome/"> </input>
+        </div>
+            </div>
+        </form>
+</div>
+</body>
+</html>

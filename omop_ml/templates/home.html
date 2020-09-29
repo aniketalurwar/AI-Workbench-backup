@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<script src="https://kit.fontawesome.com/6c67c6518b.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Research Workbench</title>
+</head>
+<body>
+<h2><i class="fas fa-brain" style="color:#FFBF00"></i> AI Research Workbench</h2>
+<form method="post" action="/getdata/">
+    <div class="containermain">
+    <div class="container1">
+        <h3><i class="fas fa-people-arrows"style="color:#FFBF00"></i> Cohort </h3>
+    <div class="row">
+      <div class="col-25">
+        <label for="cohort">Select Cohort</label>
+      </div>
+        <div class="col-75">
+        <select id="cohort" name="cohort">
+          <option value="1">Coronavirus Hospitalization</option>
+          <option value="2">NAFLD to Liver Carcinoma</option>
+        </select>
+      </div>
+           <!--<datalist id="suggestions">
+         {% for types in result %}
+            <option>{{types}}</option>
+        {%endfor%}
+          </datalist>
+          <input  autoComplete="on" list="suggestions" name = "age" class = "col-75search"/>-->
+
+    </div>
+        <h3><i class="fas fa-disease" style="color:#FFBF00"></i> Pre-Existing Conditions </h3>
+    <div class="row">
+      <div class="col-25">
+        <label for="precond1">Select Preconditions you want to check for:</label>
+      </div>
+      <div class="col-75">
+      <div class="col-50">
+      <input type="checkbox" id="precond1" name="precond1" value="1">
+        <label for="precond1"> Hypertension</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond2" name="precond2" value="1">
+        <label for="precond2"> Diabetes</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond3" name="precond3" value="1">
+        <label for="precond3"> Kidney</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond4" name="precond4" value="1">
+        <label for="precond4"> Cancer</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond5" name="precond5" value="1">
+        <label for="precond5"> Obesity</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond6" name="precond6" value="1">
+        <label for="precond6"> Asthma</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond7" name="precond7" value="1">
+        <label for="precond7"> Liver Problems</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond8" name="precond8" value="1">
+        <label for="precond8"> Lung Problems</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond9" name="precond9" value="1">
+        <label for="precond8"> Hepatitis B</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond10" name="precond10" value="1">
+        <label for="precond8"> Hepatitis C</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="precond11" name="precond11" value="1">
+        <label for="precond8"> HIV</label><br>
+      </div>
+      </div>
+        <!--<select id="precond" name="precond" multiple>
+          <option value="1">Hypertension</option>
+          <option value="2">Diabetes</option>
+          <option value="3">Kidney Problems</option>
+          <option value="4">Thyroid Problems</option>
+          <option value="5">Obesity</option>
+          <option value="6">Asthma</option>
+          <option value="7">Liver Problems</option>
+          <option value="8">Lung Problems</option>
+        </select>-->
+
+    </div>
+        <h3><i class="fas fa-user-friends" style="color:#FFBF00"></i> Characteristics </h3>
+    <div class="row">
+      <div class="col-25">
+        <label for="charac1">Select Patient Characteristics you want:</label>
+      </div>
+        <div class="col-75">
+        <div class="col-50">
+      <input type="checkbox" id="charac1" name="charac1" value="1">
+        <label for="charac1"> Age</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="charac2" name="charac2" value="1">
+        <label for="charac2"> Gender</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="charac3" name="charac3" value="1">
+        <label for="charac3"> Race</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="charac4" name="charac4" value="1">
+        <label for="charac4"> Ethnicity</label><br>
+      </div>
+        <!--<select id="charac" name="charac" multiple>
+          <option value="1">Age</option>
+          <option value="2">Gender</option>
+          <option value="3">Race</option>
+          <option value="4">Ethnicity</option>
+        </select>-->
+      </div>
+    </div>
+    </div>
+
+    <div class="container2">
+
+    <h3><i class="fas fa-vials" style="color:#FFBF00"></i> Latest Labs </h3>
+    <div class="row">
+      <div class="col-25">
+        <label for="labs1">Select Labs you want included:</label>
+      </div>
+      <div class="col-75">
+      <div class="col-50">
+      <input type="checkbox" id="labs1" name="labs1" value="1">
+        <label for="labs1"> WBC</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs2" name="labs2" value="1">
+        <label for="labs2"> Hemoglobin</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs3" name="labs3" value="1">
+        <label for="labs3"> Glucose</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs4" name="labs4" value="1">
+        <label for="labs4"> Hematocrat</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs5" name="labs5" value="1">
+        <label for="labs5"> Platelet Count</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs6" name="labs6" value="1">
+        <label for="labs6"> Sodium</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs7" name="labs7" value="1">
+        <label for="labs7"> Potassium</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs8" name="labs8" value="1">
+        <label for="labs8"> BUN</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs9" name="labs9" value="1">
+        <label for="labs9"> PT/INR</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs10" name="labs10" value="1">
+        <label for="labs10"> Calcium</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs11" name="labs11" value="1">
+        <label for="labs11"> Albumin</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs12" name="labs12" value="1">
+        <label for="labs12"> Total Protein</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs13" name="labs13" value="1">
+        <label for="labs13"> Total CO2</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs14" name="labs14" value="1">
+        <label for="labs14"> Chloride</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs15" name="labs15" value="1">
+        <label for="labs15"> Creatinine</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs16" name="labs16" value="1">
+        <label for="labs16"> ALP</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs17" name="labs17" value="1">
+        <label for="labs17"> ALT</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs18" name="labs18" value="1">
+        <label for="labs18"> AST</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="labs19" name="labs19" value="1">
+        <label for="labs19"> Bilirubin</label><br>
+      </div>
+      </div>
+    </div>
+
+        <h3><i class="fas fa-heartbeat" style="color:#FFBF00"></i> Latest Vitals </h3>
+    <div class="row">
+      <div class="col-25">
+        <label for="vitals1">Select Vitals you want included:</label>
+      </div>
+      <div class="col-75">
+      <div class="col-50">
+      <input type="checkbox" id="vitals1" name="vitals1" value="1">
+        <label for="vitals1">Systolic Blood Pressure</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="vitals2" name="vitals2" value="1">
+        <label for="vitals2"> Diastolic Blood Pressure</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="vitals3" name="vitals3" value="1">
+        <label for="vitals3"> Heart Rate</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="vitals4" name="vitals4" value="1">
+        <label for="vitals4"> Respiratory Rate</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="vitals5" name="vitals5" value="1">
+        <label for="vitals5"> Temperature</label><br>
+      </div>
+      <div class="col-50">
+      <input type="checkbox" id="vitals6" name="vitals6" value="1">
+        <label for="vitals6"> Oxygen Sat.</label><br>
+      </div>
+      </div>
+    </div>
+    <h3><i class="fas fa-hdd"style="color:#FFBF00"></i> Model Name </h3>
+    <div class="row">
+      <div class="col-25">
+        <label for="model">Please Specify Model Name here:</label>
+      </div>
+        <div class="col-75">
+        <input type="text" id="model" name="model" required>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="lg1"></label>
+      </div>
+    </div>
+    <div class="row">
+      <input type="submit" name= "btn" value="Generate">
+    </div>
+    </div>
+    </div>
+  </form>
+<div class="row" style="background:#f2f2f2">
+      <input type="submit" name= "dummybtn" value="Generate" onclick="clickgenerate()">
+</div>
+<div class ='loader'>
+<div style="width:60%; margin: auto;">
+      <label class="messagemain">Please wait while we look for requested data in all directions...</label>
+</div>
+<div style="width:60%; margin: auto; text-align:center;">
+    <label class="messageicon"><i class="far fa-compass fa-spin"></i></label>
+</div>
+</div>
+<script>
+function clickgenerate(){
+if (!$('#model').val() ) {
+    alert("Please fill out Model Name");
+  }
+else{
+$("input[name = 'btn']").click();
+$("input[name = 'dummybtn']").hide();
+$(".loader").show(500);
+$(".containermain").hide(500);
+}
+}
+$(document).ready(function(){
+$(".loader").hide();
+$("input[name = 'btn']").hide();
+})
+</script>
+</body>
+</html>

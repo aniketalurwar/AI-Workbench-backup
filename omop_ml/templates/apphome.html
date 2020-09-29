@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<script src="https://kit.fontawesome.com/6c67c6518b.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<style>
+.col-25b {
+  float: left;
+  width: calc(25% - 10px);
+  margin-top: 6px;
+  margin-left: 10px;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+  width: 90%;
+}
+.normaltext {
+  text-align:left;
+  font-size:30px;
+  color:#002855;
+}
+.labeltext {
+  font-size:18px;
+  color:#002855;
+}
+input[type=button] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+  width: 90%;
+}
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Research Workbench</title>
+</head>
+<body>
+<h2><i class="fas fa-brain" style="color:#FFBF00"></i> AI Research Workbench</h2>
+<div class="containermain">
+     <div class="row">
+      <div class="col-100">
+          <label class="normaltext">What do you want to do? </label>
+      </div>
+     </div>
+    <form method="post" action="/home/">
+    <div class="row">
+        <div class="col-25b">
+            <input type="button" name= "btnmodel" value="Predict using existing model" onclick="clickexpand()"> </input>
+        </div>
+        <div class="col-25b">
+            <input type="submit" name= "btnnew" value="Create a new Model" action="/home/"> </input>
+        </div>
+        <div class="col-25b">
+            <input type="button" name= "btncohort" value="Develop a new Cohort"> </input>
+        </div>
+    </div>
+        </form>
+    <form method="post" action="/modelhome/">
+    <div class="row modellistdiv">
+        <datalist id="suggestions">
+         {% for types in pathfile %}
+            <option>{{types}}</option>
+        {%endfor%}
+          </datalist>
+        <div class="col-25">
+            <label class = "labeltext" for="modellist">Select the model you want to use:</label>
+        </div>
+        <div class="col-75">
+          <input  autoComplete="on" list="suggestions" id = "modellist" class = "col-75search"/>
+        </div>
+        <div class="col-25b">
+            <input type="submit" id = "go" name= "go" value="Go"> </input>
+        </div>
+    <input type="hidden" id = "st" name = "st" />
+    <input type="hidden" id = "fn" name = "fn" />
+    </div>
+    </form>
+
+</div>
+<script>
+function clickexpand(){
+$("input[name = 'btnnew']").hide();
+$("input[name = 'btncohort']").hide();
+$(".modellistdiv").show();
+}
+
+
+$(document).ready(function(){
+$(".modellistdiv").hide();
+$("#go").hide();
+})
+$("#modellist").change(function(){
+$("#go").show();
+var fnstr = $("#modellist").val();
+var fnfile = fnstr.replace(".txt",".sav");
+var stval = "models\\".concat($("#modellist").val());
+var fnval = "models\\".concat(fnfile);
+$("#st").val(stval);
+$("#fn").val(fnval);
+
+})
+</script>
+</body>
+</html>
+{% endblock %}
